@@ -672,9 +672,9 @@
                 <h3>View Attendance for Specific Date Range</h3>
                 <div class="date-inputs">
                     <label>From:</label>
-                    <input type="date" id="startDate" value="2026-01-28">
+                    <input type="date" id="startDate">
                     <label>To:</label>
-                    <input type="date" id="endDate" value="2026-02-28">
+                    <input type="date" id="endDate">
                     <button class="btn btn-present" id="applyDateRange">Apply Range</button>
                     <button class="btn btn-absent" id="resetDateRange">Reset</button>
                     <br>
@@ -686,15 +686,16 @@
             </div>
             
             <div class="attendance-buttons">
-                <button class="btn btn-present" id="markPresent">Mark Present</button>
-                <button class="btn btn-absent" id="markAbsent">Mark Absent</button>
+                <button class="btn btn-present" id="markPresent">Mark Present (Today)</button>
+                <button class="btn btn-absent" id="markAbsent">Mark Absent (Today)</button>
             </div>
             
             <div class="calendar-container">
                 <div class="calendar-header">
-                    <h2 id="calendarMonth">February 2026</h2>
+                    <h2 id="calendarMonth">Loading Month...</h2>
                     <div class="calendar-nav">
                         <button class="calendar-nav-btn" id="prevMonth">← Previous</button>
+                        <button class="calendar-nav-btn" id="todayMonth">Today</button>
                         <button class="calendar-nav-btn" id="nextMonth">Next →</button>
                     </div>
                 </div>
@@ -706,7 +707,7 @@
             <!-- Stats Section -->
             <div class="stats">
                 <div class="stat-card">
-                    <h3>Current %</h3>
+                    <h3>Your Attendance %</h3>
                     <div class="stat-value percentage" id="attendancePercent">0%</div>
                     <div id="rollingDisplay" class="rolling-badge" style="display: none;"></div>
                     <p>Status: <span id="statusText">No Data</span></p>
@@ -751,41 +752,29 @@
         <div class="page" id="visualizationPage">
             <div class="visualization-page">
                 <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Your Attendance Analytics</h1>
-                <p style="color: #a0a0a0; max-width: 600px; margin-bottom: 2rem;">Compare current vs rolling average performance.</p>
+                <p style="color: #a0a0a0; max-width: 600px; margin-bottom: 2rem;">Your overall attendance performance and analytics.</p>
                 
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-bottom: 30px;">
-                    <!-- Current Attendance Ring -->
+                    <!-- Attendance Ring -->
                     <div style="text-align: center;">
-                        <h3 style="color: #4cc9f0; margin-bottom: 15px;">Current Attendance</h3>
+                        <h3 style="color: #4cc9f0; margin-bottom: 15px;">Your Attendance Percentage</h3>
                         <div class="attendance-ring">
                             <div class="ring-container" id="currentRing"></div>
                             <div class="ring-inner">
                                 <div class="percentage" id="visualPercentage">0%</div>
-                                <div style="color: #a0a0a0; margin-top: 10px;">CURRENT</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Rolling Average Ring -->
-                    <div style="text-align: center;">
-                        <h3 style="color: #ffd966; margin-bottom: 15px;">Rolling Average</h3>
-                        <div class="attendance-ring" style="width: 250px; height: 250px;">
-                            <div class="ring-container" id="rollingRing" style="background: conic-gradient(#ffd966 0% 0%, #3a0ca3 0% 100%);"></div>
-                            <div class="ring-inner" style="width: 70%; height: 70%;">
-                                <div class="rolling-percentage" id="visualRollingPercentage">0%</div>
-                                <div style="color: #a0a0a0; margin-top: 10px;">ROLLING</div>
+                                <div style="color: #a0a0a0; margin-top: 10px;">ATTENDANCE</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Rolling Average Details -->
+                <!-- Attendance Details -->
                 <div class="rolling-visualization" style="margin: 20px auto;">
-                    <h3>📊 Rolling Average Breakdown</h3>
+                    <h3>📊 Attendance Breakdown</h3>
                     <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 250px;">
                             <div style="position: relative; height: 30px; background: #3a0ca3; border-radius: 15px; overflow: hidden;">
-                                <div id="rollingBar" style="position: absolute; height: 100%; width: 0%; background: linear-gradient(90deg, #ffd966, #f39c12); border-radius: 15px; transition: width 0.3s;"></div>
+                                <div id="rollingBar" style="position: absolute; height: 100%; width: 0%; background: linear-gradient(90deg, #4cc9f0, #ffd966); border-radius: 15px; transition: width 0.3s;"></div>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-top: 5px; color: #a0a0a0;">
                                 <span>0%</span>
@@ -793,9 +782,9 @@
                                 <span>100%</span>
                             </div>
                         </div>
-                        <div style="text-align: center; background: rgba(255, 217, 102, 0.1); padding: 15px 25px; border-radius: 10px;">
-                            <div style="font-size: 0.9rem; color: #a0a0a0;">Rolling Average</div>
-                            <div id="visualRollingNumber" style="font-size: 2.5rem; font-weight: bold; color: #ffd966;">0%</div>
+                        <div style="text-align: center; background: rgba(76, 201, 240, 0.1); padding: 15px 25px; border-radius: 10px; border: 1px solid rgba(76, 201, 240, 0.3);">
+                            <div style="font-size: 0.9rem; color: #a0a0a0;">Average Attendance</div>
+                            <div id="visualRollingNumber" style="font-size: 2.5rem; font-weight: bold; color: #4cc9f0;">0%</div>
                             <div id="visualRollingBreakdown" style="font-size: 0.9rem; color: #a0a0a0;"></div>
                         </div>
                     </div>
@@ -833,15 +822,23 @@
                     <label>Select Month:</label>
                     <select id="adminMonthSelect" style="padding: 8px; margin-left: 10px;">
                         <option value="0">January</option>
-                        <option value="1" selected>February</option>
+                        <option value="1">February</option>
                         <option value="2">March</option>
                         <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
                     </select>
                     <label style="margin-left: 20px;">Working Days:</label>
                     <input type="number" id="workingDaysInput" value="22" min="15" max="31" style="padding: 8px; margin-left: 10px; width: 80px;">
                     <button class="btn btn-present" id="setWorkingDays" style="margin-left: 20px;">Set Working Days</button>
                 </div>
-                <p id="workingDaysInfo" style="color: #666; margin-top: 10px;">Current: February 2026 - 22 working days</p>
+                <p id="workingDaysInfo" style="color: #666; margin-top: 10px;">Loading month info...</p>
                 
                 <h3 style="margin-top: 30px;">Add Holiday</h3>
                 <div style="margin: 15px 0;">
@@ -880,6 +877,7 @@
     </div>
     
     <!-- Login Modal -->
+    <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <h2>Login</h2>
@@ -894,6 +892,19 @@
                 </div>
                 <button type="submit" class="btn-track" style="width: 100%;">Login</button>
             </form>
+            
+            <!-- Admin Credentials Info & Quick Login -->
+            <div style="margin-top: 15px; padding: 12px; background: #eef2ff; border: 1px solid #4361ee; border-radius: 8px; text-align: left;">
+                <div style="font-weight: bold; color: #3a0ca3; margin-bottom: 5px; font-size: 0.95rem;">🔑 Admin Credentials</div>
+                <div style="font-size: 0.88rem; color: #333; line-height: 1.5;">
+                    <strong>Email:</strong> <code style="background: white; padding: 2px 6px; border-radius: 4px; color: #3a0ca3;">admin@attendance.com</code><br>
+                    <strong>Password:</strong> <code style="background: white; padding: 2px 6px; border-radius: 4px; color: #3a0ca3;">admin123</code>
+                </div>
+                <button type="button" id="quickLoginAdminBtn" class="btn btn-purple" style="margin-top: 8px; width: 100%; padding: 6px; font-size: 0.85rem; cursor: pointer;">
+                    ⚡ Quick Login as Admin
+                </button>
+            </div>
+
             <p style="text-align: center; margin-top: 15px; color: #666;">
                 Need an account? <a href="#" id="showSignup" style="color: #4361ee;">Sign up</a>
             </p>
@@ -927,29 +938,111 @@
         </div>
     </div>
 
+    <!-- Attendance Marking Modal (No numbers, dedicated Present/Absent buttons & notes) -->
+    <div class="modal" id="attendanceModal">
+        <div class="modal-content" style="max-width: 440px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                    <h2 id="modalDateTitle" style="color: #4361ee; margin-bottom: 4px; font-size: 1.4rem;">Mark Attendance</h2>
+                    <p id="modalDateSubtitle" style="color: #666; font-size: 0.9rem;"></p>
+                </div>
+                <button type="button" id="closeAttendanceModalX" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #888; line-height: 1;">&times;</button>
+            </div>
+            
+            <div id="modalStatusBadge" style="margin-bottom: 18px; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 0.95rem;">
+                <!-- Status badge populated by JS -->
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #333;">Mark Attendance:</label>
+                <div style="display: flex; gap: 12px;">
+                    <button type="button" class="btn btn-present" id="modalPresentBtn" style="flex: 1; padding: 12px; font-size: 1rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        ✓ Present
+                    </button>
+                    <button type="button" class="btn btn-absent" id="modalAbsentBtn" style="flex: 1; padding: 12px; font-size: 1rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        ✕ Absent
+                    </button>
+                </div>
+            </div>
+            
+            <div id="modalNoteSection" style="margin-bottom: 18px;">
+                <label for="modalAbsenceNote" style="display: block; font-weight: bold; margin-bottom: 6px; color: #333; font-size: 0.9rem;">
+                    📝 Reason for Absence / Notes:
+                </label>
+                <textarea id="modalAbsenceNote" placeholder="Enter reason if absent (e.g., Sick, Personal work, Family event)" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 0.95rem; box-sizing: border-box;"></textarea>
+                <small style="color: #777; display: block; margin-top: 4px;">Note is saved with your attendance record.</small>
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+                <button type="button" class="btn btn-warning" id="modalClearBtn" style="display: none; padding: 8px 14px; font-size: 0.9rem;">
+                    🗑️ Clear Mark
+                </button>
+                <div style="margin-left: auto;">
+                    <button type="button" class="btn" id="modalCancelBtn" style="background: #e0e0e0; color: #333; padding: 8px 16px; font-size: 0.9rem;">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ==================== STATE MANAGEMENT ====================
-        let currentMonth = 1; // February
-        let currentYear = 2026;
+        const initialDate = new Date();
+        let currentMonth = initialDate.getMonth();
+        let currentYear = initialDate.getFullYear();
         let isLoggedIn = false;
         let currentUserEmail = null;
         let isAdmin = false;
         
+        // Date parsing helper to avoid timezone offset shifts
+        function parseLocalDate(dateStr) {
+            if (!dateStr) return null;
+            if (dateStr instanceof Date) return dateStr;
+            const parts = String(dateStr).split('-');
+            if (parts.length === 3) {
+                const y = parseInt(parts[0], 10);
+                const m = parseInt(parts[1], 10) - 1;
+                const d = parseInt(parts[2], 10);
+                return new Date(y, m, d);
+            }
+            return new Date(dateStr);
+        }
+
         // Store data PER USER
         let usersData = {};
+        
+        // Indian National & Gazetted Holidays (Pre-loaded with Admin access to add/remove)
+        const defaultIndianHolidays = {
+            '2026-0-1': "New Year's Day",
+            '2026-0-14': 'Makar Sankranti / Pongal',
+            '2026-0-26': 'Republic Day',
+            '2026-1-15': 'Maha Shivratri',
+            '2026-2-4': 'Holi',
+            '2026-2-20': 'Eid-ul-Fitr',
+            '2026-2-22': 'Ugadi / Gudi Padwa',
+            '2026-3-3': 'Good Friday',
+            '2026-3-14': 'Dr. B.R. Ambedkar Jayanti',
+            '2026-3-21': 'Ram Navami',
+            '2026-4-1': 'May Day / Labour Day',
+            '2026-4-27': 'Bakrid / Eid al-Adha',
+            '2026-5-26': 'Muharram',
+            '2026-7-15': 'Independence Day',
+            '2026-7-27': 'Raksha Bandhan',
+            '2026-8-4': 'Janmashtami',
+            '2026-8-15': 'Ganesh Chaturthi / Milad-un-Nabi',
+            '2026-9-2': 'Mahatma Gandhi Jayanti',
+            '2026-9-20': 'Dussehra / Vijayadashami',
+            '2026-10-8': 'Diwali / Deepavali',
+            '2026-10-9': 'Govardhan Puja',
+            '2026-10-10': 'Bhai Dooj',
+            '2026-10-24': 'Guru Nanak Jayanti',
+            '2026-11-25': 'Christmas'
+        };
+
         let adminSettings = {
-            workingDays: {
-                '2026-1': 22, // February 2026: 22 working days
-                '2026-0': 23, // January 2026: 23 working days
-            },
-            holidays: {
-                '2026-1-8': 'Sunday',
-                '2026-1-15': 'Sunday',
-                '2026-1-22': 'Sunday',
-                '2026-1-1': 'Sunday',
-                '2026-1-14': '2nd Saturday',
-                '2026-1-28': '4th Saturday'
-            }
+            workingDays: {},
+            holidays: Object.assign({}, defaultIndianHolidays)
         };
         
         // Date range state - SAVED in localStorage
@@ -972,6 +1065,8 @@
                     usersData = data.usersData || {};
                     adminSettings = data.adminSettings || adminSettings;
                 }
+                if (!adminSettings.workingDays) adminSettings.workingDays = {};
+                adminSettings.holidays = Object.assign({}, defaultIndianHolidays, adminSettings.holidays || {});
                 
                 // Load current user
                 const currentUser = localStorage.getItem('currentUser');
@@ -987,8 +1082,8 @@
                 const savedRange = localStorage.getItem('dateRangeState');
                 if (savedRange) {
                     const range = JSON.parse(savedRange);
-                    if (range.start) dateRange.start = new Date(range.start);
-                    if (range.end) dateRange.end = new Date(range.end);
+                    if (range.start) dateRange.start = parseLocalDate(range.start);
+                    if (range.end) dateRange.end = parseLocalDate(range.end);
                     dateRange.active = range.active || false;
                 }
                 
@@ -996,13 +1091,18 @@
                 const savedPrevPercent = localStorage.getItem('previousPercent');
                 if (savedPrevPercent) {
                     previousPeriodPercentage = parseInt(savedPrevPercent);
-                    document.getElementById('previousPercent').value = previousPeriodPercentage;
+                    const prevInput = document.getElementById('previousPercent');
+                    if (prevInput) prevInput.value = previousPeriodPercentage;
                 }
                 
-                // Set default dates if not set
-                if (!dateRange.start) {
-                    dateRange.start = new Date('2026-01-28');
-                    dateRange.end = new Date('2026-02-28');
+                // Set default dates if not set or if using outdated default
+                const now = new Date();
+                const defaultStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                const defaultEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                
+                if (!dateRange.start || (!dateRange.active && dateRange.start.getFullYear() === 2026 && dateRange.start.getMonth() === 0 && dateRange.start.getDate() === 28)) {
+                    dateRange.start = defaultStart;
+                    dateRange.end = defaultEnd;
                 }
                 
                 // Update date inputs
@@ -1145,6 +1245,7 @@
         const markPresent = document.getElementById('markPresent');
         const markAbsent = document.getElementById('markAbsent');
         const prevMonthBtn = document.getElementById('prevMonth');
+        const todayMonthBtn = document.getElementById('todayMonth');
         const nextMonthBtn = document.getElementById('nextMonth');
         const calendar = document.getElementById('calendar');
         const viewVisualBtn = document.getElementById('viewVisualBtn');
@@ -1169,7 +1270,26 @@
             setupEventListeners();
             updateDateRangeInfo();
             refreshHolidayList();
-            document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            // Show full current date (e.g. Wednesday, September 23, 2026)
+            const today = new Date();
+            document.getElementById('currentDate').innerText = today.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Set admin month select to current month
+            const adminMonthSelect = document.getElementById('adminMonthSelect');
+            if (adminMonthSelect) {
+                adminMonthSelect.value = currentMonth;
+                const key = `${currentYear}-${currentMonth}`;
+                const workingDaysVal = adminSettings.workingDays && adminSettings.workingDays[key] ? adminSettings.workingDays[key] : 22;
+                document.getElementById('workingDaysInput').value = workingDaysVal;
+                document.getElementById('workingDaysInfo').textContent = 
+                    `Current: ${getMonthName(currentMonth)} ${currentYear} - ${workingDaysVal} working days`;
+            }
         });
         
         // ==================== EVENT LISTENERS ====================
@@ -1209,6 +1329,92 @@
                 signupModal.classList.remove('active');
                 loginModal.classList.add('active');
             });
+
+            // Quick Login as Admin Button
+            const quickLoginAdminBtn = document.getElementById('quickLoginAdminBtn');
+            if (quickLoginAdminBtn) {
+                quickLoginAdminBtn.addEventListener('click', function() {
+                    document.getElementById('email').value = 'admin@attendance.com';
+                    document.getElementById('password').value = 'admin123';
+                    document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+                });
+            }
+
+            // Attendance Marking Modal Event Listeners
+            const attendanceModal = document.getElementById('attendanceModal');
+            const closeAttendanceModalX = document.getElementById('closeAttendanceModalX');
+            const modalCancelBtn = document.getElementById('modalCancelBtn');
+            const modalPresentBtn = document.getElementById('modalPresentBtn');
+            const modalAbsentBtn = document.getElementById('modalAbsentBtn');
+            const modalClearBtn = document.getElementById('modalClearBtn');
+
+            const closeAttModal = () => {
+                if (attendanceModal) attendanceModal.classList.remove('active');
+            };
+
+            if (closeAttendanceModalX) closeAttendanceModalX.addEventListener('click', closeAttModal);
+            if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeAttModal);
+
+            if (modalPresentBtn) {
+                modalPresentBtn.addEventListener('click', function() {
+                    if (!selectedDateKeyForModal) return;
+                    const userData = getUserData();
+                    userData.absent = userData.absent.filter(d => d !== selectedDateKeyForModal);
+                    if (!userData.present.includes(selectedDateKeyForModal)) {
+                        userData.present.push(selectedDateKeyForModal);
+                    }
+                    const note = document.getElementById('modalAbsenceNote').value.trim();
+                    if (note) {
+                        if (!userData.notes) userData.notes = {};
+                        userData.notes[selectedDateKeyForModal] = note;
+                    } else if (userData.notes && userData.notes[selectedDateKeyForModal]) {
+                        delete userData.notes[selectedDateKeyForModal];
+                    }
+                    saveUserData(userData);
+                    updateCalendar();
+                    updateStats();
+                    closeAttModal();
+                    showNotification(`Day ${selectedDayForModal} marked as Present`, 'success');
+                });
+            }
+
+            if (modalAbsentBtn) {
+                modalAbsentBtn.addEventListener('click', function() {
+                    if (!selectedDateKeyForModal) return;
+                    const userData = getUserData();
+                    userData.present = userData.present.filter(d => d !== selectedDateKeyForModal);
+                    if (!userData.absent.includes(selectedDateKeyForModal)) {
+                        userData.absent.push(selectedDateKeyForModal);
+                    }
+                    const note = document.getElementById('modalAbsenceNote').value.trim();
+                    if (note) {
+                        if (!userData.notes) userData.notes = {};
+                        userData.notes[selectedDateKeyForModal] = note;
+                    }
+                    saveUserData(userData);
+                    updateCalendar();
+                    updateStats();
+                    closeAttModal();
+                    showNotification(`Day ${selectedDayForModal} marked as Absent`, 'success');
+                });
+            }
+
+            if (modalClearBtn) {
+                modalClearBtn.addEventListener('click', function() {
+                    if (!selectedDateKeyForModal) return;
+                    const userData = getUserData();
+                    userData.present = userData.present.filter(d => d !== selectedDateKeyForModal);
+                    userData.absent = userData.absent.filter(d => d !== selectedDateKeyForModal);
+                    if (userData.notes && userData.notes[selectedDateKeyForModal]) {
+                        delete userData.notes[selectedDateKeyForModal];
+                    }
+                    saveUserData(userData);
+                    updateCalendar();
+                    updateStats();
+                    closeAttModal();
+                    showNotification(`Attendance cleared for Day ${selectedDayForModal}`, 'info');
+                });
+            }
             
             // Login form
             loginForm.addEventListener('submit', function(e) {
@@ -1383,6 +1589,16 @@
                 updateStats();
             });
             
+            if (todayMonthBtn) {
+                todayMonthBtn.addEventListener('click', function() {
+                    const now = new Date();
+                    currentMonth = now.getMonth();
+                    currentYear = now.getFullYear();
+                    updateCalendar();
+                    updateStats();
+                });
+            }
+            
             nextMonthBtn.addEventListener('click', function() {
                 currentMonth++;
                 if (currentMonth > 11) {
@@ -1392,6 +1608,19 @@
                 updateCalendar();
                 updateStats();
             });
+            
+            // Admin Month Select change listener
+            const adminMonthSelect = document.getElementById('adminMonthSelect');
+            if (adminMonthSelect) {
+                adminMonthSelect.addEventListener('change', function() {
+                    const selectedMonth = parseInt(this.value);
+                    const key = `${currentYear}-${selectedMonth}`;
+                    const daysVal = adminSettings.workingDays && adminSettings.workingDays[key] ? adminSettings.workingDays[key] : 22;
+                    document.getElementById('workingDaysInput').value = daysVal;
+                    document.getElementById('workingDaysInfo').textContent = 
+                        `Current: ${getMonthName(selectedMonth)} ${currentYear} - ${daysVal} working days`;
+                });
+            }
             
             // Admin: Set Working Days
             setWorkingDaysBtn.addEventListener('click', function() {
@@ -1409,6 +1638,7 @@
                 showNotification(`Working days set for ${getMonthName(month)} ${currentYear}: ${days} days`, 'success');
                 document.getElementById('workingDaysInfo').textContent = 
                     `Current: ${getMonthName(month)} ${currentYear} - ${days} working days`;
+                updateStats();
             });
             
             // Admin: Add Holiday
@@ -1421,7 +1651,7 @@
                     return;
                 }
                 
-                const date = new Date(dateStr);
+                const date = parseLocalDate(dateStr);
                 const year = date.getFullYear();
                 const month = date.getMonth();
                 const day = date.getDate();
@@ -1451,7 +1681,7 @@
                     return;
                 }
                 
-                const date = new Date(dateStr);
+                const date = parseLocalDate(dateStr);
                 const year = date.getFullYear();
                 const month = date.getMonth();
                 const day = date.getDate();
@@ -1473,8 +1703,13 @@
             
             // Date Range: Apply
             applyDateRangeBtn.addEventListener('click', function() {
-                const start = new Date(document.getElementById('startDate').value);
-                const end = new Date(document.getElementById('endDate').value);
+                const start = parseLocalDate(document.getElementById('startDate').value);
+                const end = parseLocalDate(document.getElementById('endDate').value);
+                
+                if (!start || !end || isNaN(start.getTime()) || isNaN(end.getTime())) {
+                    showNotification('Please select valid start and end dates', 'error');
+                    return;
+                }
                 
                 if (start > end) {
                     showNotification('Start date must be before end date', 'error');
@@ -1493,6 +1728,10 @@
             // Date Range: Reset
             resetDateRangeBtn.addEventListener('click', function() {
                 dateRange.active = false;
+                const now = new Date();
+                dateRange.start = new Date(now.getFullYear(), now.getMonth(), 1);
+                dateRange.end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                updateDateInputs();
                 saveData();
                 updateStats();
                 updateDateRangeInfo();
@@ -1722,14 +1961,16 @@
                 
                 if (isHoliday) {
                     const date = new Date(currentYear, currentMonth, day);
-                    if (date.getDay() === 0) {
+                    const holidayKey = `${currentYear}-${currentMonth}-${day}`;
+                    if (adminSettings.holidays && adminSettings.holidays[holidayKey]) {
+                        status.textContent = adminSettings.holidays[holidayKey];
+                    } else if (date.getDay() === 0) {
                         status.textContent = 'Sunday';
                     } else if (date.getDay() === 6) {
                         const week = Math.ceil(day / 7);
                         status.textContent = week === 2 ? '2nd Sat' : (week === 4 ? '4th Sat' : 'Holiday');
                     } else {
-                        const holidayKey = `${currentYear}-${currentMonth}-${day}`;
-                        status.textContent = adminSettings.holidays[holidayKey] || 'Holiday';
+                        status.textContent = 'Holiday';
                     }
                     status.style.color = '#ff9800';
                 } else {
@@ -1749,139 +1990,74 @@
                 
                 dayEl.appendChild(status);
                 
-                // Add click event for non-holiday days
-                if (isLoggedIn && !isHoliday) {
-                    dayEl.addEventListener('click', function() {
-                        handleDayClick(day, `${currentYear}-${currentMonth}-${day}`);
-                    });
-                }
+                // Add click event for non-holiday days (or prompt login/holiday info)
+                dayEl.addEventListener('click', function() {
+                    if (!isLoggedIn) {
+                        showNotification('Please login to mark attendance', 'error');
+                        loginModal.classList.add('active');
+                        return;
+                    }
+                    if (isHoliday) {
+                        const holidayKey = `${currentYear}-${currentMonth}-${day}`;
+                        const hName = (adminSettings.holidays && adminSettings.holidays[holidayKey]) || 'Holiday';
+                        showNotification(`📅 Holiday: ${hName} (Non-working day)`, 'info');
+                        return;
+                    }
+                    // Future dates marking is fully enabled via interactive modal
+                    handleDayClick(day, `${currentYear}-${currentMonth}-${day}`);
+                });
                 
                 calendar.appendChild(dayEl);
             }
         }
         
+        let selectedDayForModal = null;
+        let selectedDateKeyForModal = null;
+
         function handleDayClick(day, dateKey) {
-            const clickedDate = new Date(currentYear, currentMonth, day);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            selectedDayForModal = day;
+            selectedDateKeyForModal = dateKey;
             
-            if (clickedDate > today) {
-                showNotification('Cannot mark attendance for future dates!', 'error');
-                return;
-            }
+            const [year, month, d] = dateKey.split('-').map(Number);
+            const dateObj = new Date(year, month, d);
+            const dateStr = dateObj.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric' 
+            });
             
             const userData = getUserData();
-            
             const isPresent = userData.present.includes(dateKey);
             const isAbsent = userData.absent.includes(dateKey);
+            const existingNote = (userData.notes && userData.notes[dateKey]) || '';
             
-            let action;
-            if (isPresent) {
-                action = prompt(
-                    `Day ${day} is marked as PRESENT\n\n` +
-                    `1. Change to Absent\n` +
-                    `2. Remove mark\n` +
-                    `3. Cancel\n\n` +
-                    `Enter 1, 2, or 3:`,
-                    '3'
-                );
-            } else if (isAbsent) {
-                action = prompt(
-                    `Day ${day} is marked as ABSENT\n\n` +
-                    `1. Change to Present\n` +
-                    `2. Remove mark\n` +
-                    `3. Cancel\n\n` +
-                    `Enter 1, 2, or 3:`,
-                    '3'
-                );
-            } else {
-                action = prompt(
-                    `Day ${day} is NOT MARKED\n\n` +
-                    `1. Mark as Present\n` +
-                    `2. Mark as Absent\n` +
-                    `3. Cancel\n\n` +
-                    `Enter 1, 2, or 3:`,
-                    '3'
-                );
-            }
+            document.getElementById('modalDateTitle').textContent = `Day ${day} Attendance`;
+            document.getElementById('modalDateSubtitle').textContent = dateStr;
             
-            if (action === null || action.trim() === '') return;
-            
-            action = action.trim();
-            
-            if (action === '3' || action.toLowerCase() === 'cancel') {
-                showNotification('Action cancelled', 'info');
-                return;
-            }
-            
-            if (action !== '1' && action !== '2') {
-                showNotification('Invalid choice. Please enter 1, 2, or 3', 'error');
-                return;
-            }
-            
-            const actionNum = parseInt(action);
+            const statusBadge = document.getElementById('modalStatusBadge');
+            const clearBtn = document.getElementById('modalClearBtn');
+            const noteInput = document.getElementById('modalAbsenceNote');
+            noteInput.value = existingNote;
             
             if (isPresent) {
-                if (actionNum === 1) {
-                    // Change to Absent
-                    userData.present = userData.present.filter(d => d !== dateKey);
-                    userData.absent.push(dateKey);
-                    
-                    const note = prompt('Reason for absence (optional):');
-                    if (note !== null && note.trim() !== '') {
-                        if (!userData.notes) userData.notes = {};
-                        userData.notes[dateKey] = note.trim();
-                    }
-                    
-                    showNotification(`Day ${day} changed to Absent`, 'success');
-                } else if (actionNum === 2) {
-                    // Remove mark
-                    userData.present = userData.present.filter(d => d !== dateKey);
-                    showNotification(`Present mark removed for day ${day}`, 'info');
-                }
+                statusBadge.style.background = '#e8f5e8';
+                statusBadge.style.color = '#4CAF50';
+                statusBadge.textContent = '✓ Currently marked as PRESENT';
+                clearBtn.style.display = 'inline-block';
             } else if (isAbsent) {
-                if (actionNum === 1) {
-                    // Change to Present
-                    userData.absent = userData.absent.filter(d => d !== dateKey);
-                    userData.present.push(dateKey);
-                    
-                    if (userData.notes && userData.notes[dateKey]) {
-                        delete userData.notes[dateKey];
-                    }
-                    
-                    showNotification(`Day ${day} changed to Present`, 'success');
-                } else if (actionNum === 2) {
-                    // Remove mark
-                    userData.absent = userData.absent.filter(d => d !== dateKey);
-                    
-                    if (userData.notes && userData.notes[dateKey]) {
-                        delete userData.notes[dateKey];
-                    }
-                    
-                    showNotification(`Absent mark removed for day ${day}`, 'info');
-                }
+                statusBadge.style.background = '#ffebee';
+                statusBadge.style.color = '#f44336';
+                statusBadge.textContent = '✕ Currently marked as ABSENT';
+                clearBtn.style.display = 'inline-block';
             } else {
-                if (actionNum === 1) {
-                    // Mark as Present
-                    userData.present.push(dateKey);
-                    showNotification(`Day ${day} marked as Present`, 'success');
-                } else if (actionNum === 2) {
-                    // Mark as Absent
-                    userData.absent.push(dateKey);
-                    
-                    const note = prompt('Reason for absence (optional):');
-                    if (note !== null && note.trim() !== '') {
-                        if (!userData.notes) userData.notes = {};
-                        userData.notes[dateKey] = note.trim();
-                    }
-                    
-                    showNotification(`Day ${day} marked as Absent`, 'success');
-                }
+                statusBadge.style.background = '#f0f2f5';
+                statusBadge.style.color = '#555';
+                statusBadge.textContent = '○ Currently NOT MARKED';
+                clearBtn.style.display = 'none';
             }
             
-            saveUserData(userData);
-            updateCalendar();
-            updateStats();
+            document.getElementById('attendanceModal').classList.add('active');
         }
         
         // ==================== STATS FUNCTIONS ====================
@@ -1933,45 +2109,59 @@
                 currentPercentage = Math.round((presentCount / totalWorkingDays) * 100);
             }
             
-            // Calculate rolling average
-            let rollingAvg = currentPercentage;
-            let showRolling = false;
+            // Calculate average percentage (show only average percentage as your attendance percentage)
+            let averagePercentage = currentPercentage;
+            let hasPrevious = previousPeriodPercentage > 0;
             
-            if (dateRange.active && previousPeriodPercentage > 0) {
-                rollingAvg = Math.round((previousPeriodPercentage + currentPercentage) / 2);
-                showRolling = true;
+            if (hasPrevious) {
+                averagePercentage = Math.round((previousPeriodPercentage + currentPercentage) / 2);
             }
             
-            // Update displays
-            document.getElementById('attendancePercent').textContent = currentPercentage + '%';
+            // Update displays - SHOW ONLY AVERAGE PERCENTAGE AS YOUR ATTENDANCE PERCENTAGE
+            document.getElementById('attendancePercent').textContent = averagePercentage + '%';
             document.getElementById('presentCount').textContent = presentCount;
             document.getElementById('absentCount').textContent = absentCount;
             document.getElementById('workingDays').textContent = totalWorkingDays;
             
-            // Show rolling average if applicable
+            // Show rolling / average breakdown badge if previous period is set
             const rollingDisplay = document.getElementById('rollingDisplay');
-            if (showRolling) {
-                rollingDisplay.style.display = 'inline-block';
-                rollingDisplay.textContent = `Rolling Avg: ${rollingAvg}% (Prev: ${previousPeriodPercentage}%)`;
-            } else {
-                rollingDisplay.style.display = 'none';
+            if (rollingDisplay) {
+                if (hasPrevious) {
+                    rollingDisplay.style.display = 'inline-block';
+                    rollingDisplay.textContent = `Average of Prev (${previousPeriodPercentage}%) & Current Period (${currentPercentage}%)`;
+                } else {
+                    rollingDisplay.style.display = 'none';
+                }
             }
             
             // Calculate needed days for 75%
-            let needed = 0;
-            if (currentPercentage < 75 && totalWorkingDays > 0) {
-                needed = Math.ceil((0.75 * totalWorkingDays - presentCount) / 1);
-                needed = Math.max(0, needed);
+            const neededDaysEl = document.getElementById('neededDays');
+            if (averagePercentage >= 75) {
+                neededDaysEl.textContent = 'Goal achieved (≥ 75%)';
+                neededDaysEl.style.color = '#4CAF50';
+            } else {
+                let needed = 0;
+                if (totalWorkingDays > 0) {
+                    if (hasPrevious) {
+                        const targetCurrent = Math.max(0, 150 - previousPeriodPercentage);
+                        const targetPresent = Math.ceil((targetCurrent / 100) * totalWorkingDays);
+                        needed = Math.max(0, targetPresent - presentCount);
+                    } else {
+                        needed = Math.ceil((0.75 * totalWorkingDays) - presentCount);
+                        needed = Math.max(0, needed);
+                    }
+                }
+                neededDaysEl.textContent = `Need ${needed} more days for 75%`;
+                neededDaysEl.style.color = '#f44336';
             }
-            document.getElementById('neededDays').textContent = `Need ${needed} more days for 75%`;
             
-            // Status text
+            // Status text based on average percentage
             let status = 'No Data';
-            if (totalWorkingDays > 0) {
-                if (currentPercentage >= 90) status = 'Excellent';
-                else if (currentPercentage >= 80) status = 'Good';
-                else if (currentPercentage >= 75) status = 'Satisfactory';
-                else if (presentCount > 0) status = 'Needs Improvement';
+            if (totalWorkingDays > 0 || hasPrevious) {
+                if (averagePercentage >= 90) status = 'Excellent';
+                else if (averagePercentage >= 80) status = 'Good';
+                else if (averagePercentage >= 75) status = 'Satisfactory';
+                else status = 'Needs Improvement';
             }
             
             document.getElementById('statusText').textContent = status;
@@ -1984,96 +2174,57 @@
                 dateRangeInfo.textContent = `Current month: ${getMonthName(currentMonth)} ${currentYear}`;
             }
             
-            // Store for visualization
+            // Store globally for visualization
+            window.averagePercentage = averagePercentage;
+            window.attendancePercentage = averagePercentage;
             window.currentPercentage = currentPercentage;
-            window.rollingAvg = rollingAvg;
-            window.showRolling = showRolling;
             window.previousPeriodPercentage = previousPeriodPercentage;
         }
         
         // ==================== VISUALIZATION FUNCTIONS ====================
         function updateVisualization() {
-            // Get current percentage
-            const percent = document.getElementById('attendancePercent').textContent;
-            const currentPercentage = parseInt(percent) || 0;
+            const avgPercent = window.averagePercentage !== undefined 
+                ? window.averagePercentage 
+                : (parseInt(document.getElementById('attendancePercent').textContent) || 0);
+            const currPercent = window.currentPercentage !== undefined ? window.currentPercentage : 0;
+            const prevPercent = window.previousPeriodPercentage || 0;
+            const hasPrev = prevPercent > 0;
             
-            // Get rolling average
-            const rollingDisplay = document.getElementById('rollingDisplay');
-            let rollingAvg = currentPercentage;
-            let showRolling = false;
-            let prevPercent = 0;
-            
-            if (rollingDisplay && rollingDisplay.style.display !== 'none') {
-                const rollingText = rollingDisplay.textContent;
-                const match = rollingText.match(/Rolling Avg: (\d+)%/);
-                const prevMatch = rollingText.match(/Prev: (\d+)%/);
-                
-                if (match) {
-                    rollingAvg = parseInt(match[1]);
-                    prevPercent = prevMatch ? parseInt(prevMatch[1]) : 0;
-                    showRolling = true;
-                }
-            }
-            
-            // Update current ring
+            // Update single prominent attendance ring
             const currentRing = document.getElementById('currentRing');
             if (currentRing) {
-                currentRing.style.background = `conic-gradient(#4cc9f0 0% ${currentPercentage}%, #3a0ca3 ${currentPercentage}% 100%)`;
+                currentRing.style.background = `conic-gradient(#4cc9f0 0% ${avgPercent}%, #3a0ca3 ${avgPercent}% 100%)`;
             }
             
-            // Update current percentage display
-            document.getElementById('visualPercentage').textContent = currentPercentage + '%';
-            
-            // Update rolling ring
-            const rollingRing = document.getElementById('rollingRing');
-            if (rollingRing) {
-                rollingRing.style.background = `conic-gradient(#ffd966 0% ${rollingAvg}%, #3a0ca3 ${rollingAvg}% 100%)`;
+            // Update percentage display inside ring
+            const visualPercentage = document.getElementById('visualPercentage');
+            if (visualPercentage) {
+                visualPercentage.textContent = avgPercent + '%';
             }
             
-            // Update rolling percentage display
-            const visualRollingPercentage = document.getElementById('visualRollingPercentage');
-            if (visualRollingPercentage) {
-                visualRollingPercentage.textContent = rollingAvg + '%';
-            }
-            
-            // Update rolling bar
+            // Update breakdown progress bar and numbers
             const rollingBar = document.getElementById('rollingBar');
             const rollingPercentValue = document.getElementById('rollingPercentValue');
             const visualRollingNumber = document.getElementById('visualRollingNumber');
             const visualRollingBreakdown = document.getElementById('visualRollingBreakdown');
             
-            if (showRolling) {
-                if (rollingBar) {
-                    rollingBar.style.width = rollingAvg + '%';
-                }
-                
-                if (rollingPercentValue) {
-                    rollingPercentValue.textContent = rollingAvg + '%';
-                }
-                
-                if (visualRollingNumber) {
-                    visualRollingNumber.textContent = rollingAvg + '%';
-                }
-                
-                if (visualRollingBreakdown) {
-                    visualRollingBreakdown.textContent = `Previous: ${prevPercent}% + Current: ${currentPercentage}% = ${rollingAvg}%`;
-                }
-            } else {
-                // If no rolling average, just show current
-                if (rollingBar) {
-                    rollingBar.style.width = currentPercentage + '%';
-                }
-                
-                if (rollingPercentValue) {
-                    rollingPercentValue.textContent = currentPercentage + '%';
-                }
-                
-                if (visualRollingNumber) {
-                    visualRollingNumber.textContent = currentPercentage + '%';
-                }
-                
-                if (visualRollingBreakdown) {
-                    visualRollingBreakdown.textContent = 'Set previous period % to see rolling average';
+            if (rollingBar) {
+                rollingBar.style.width = avgPercent + '%';
+            }
+            
+            if (rollingPercentValue) {
+                rollingPercentValue.textContent = avgPercent + '%';
+            }
+            
+            if (visualRollingNumber) {
+                visualRollingNumber.textContent = avgPercent + '%';
+            }
+            
+            if (visualRollingBreakdown) {
+                if (hasPrev) {
+                    visualRollingBreakdown.textContent = `Previous: ${prevPercent}% + Current: ${currPercent}% = Average: ${avgPercent}%`;
+                } else {
+                    visualRollingBreakdown.textContent = `Average Attendance: ${avgPercent}%`;
                 }
             }
         }
