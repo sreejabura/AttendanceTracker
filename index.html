@@ -892,18 +892,6 @@
                 </div>
                 <button type="submit" class="btn-track" style="width: 100%;">Login</button>
             </form>
-            
-            <!-- Admin Credentials Info & Quick Login -->
-            <div style="margin-top: 15px; padding: 12px; background: #eef2ff; border: 1px solid #4361ee; border-radius: 8px; text-align: left;">
-                <div style="font-weight: bold; color: #3a0ca3; margin-bottom: 5px; font-size: 0.95rem;">🔑 Admin Credentials</div>
-                <div style="font-size: 0.88rem; color: #333; line-height: 1.5;">
-                    <strong>Email:</strong> <code style="background: white; padding: 2px 6px; border-radius: 4px; color: #3a0ca3;">admin@attendance.com</code><br>
-                    <strong>Password:</strong> <code style="background: white; padding: 2px 6px; border-radius: 4px; color: #3a0ca3;">admin123</code>
-                </div>
-                <button type="button" id="quickLoginAdminBtn" class="btn btn-purple" style="margin-top: 8px; width: 100%; padding: 6px; font-size: 0.85rem; cursor: pointer;">
-                    ⚡ Quick Login as Admin
-                </button>
-            </div>
 
             <p style="text-align: center; margin-top: 15px; color: #666;">
                 Need an account? <a href="#" id="showSignup" style="color: #4361ee;">Sign up</a>
@@ -1329,16 +1317,6 @@
                 signupModal.classList.remove('active');
                 loginModal.classList.add('active');
             });
-
-            // Quick Login as Admin Button
-            const quickLoginAdminBtn = document.getElementById('quickLoginAdminBtn');
-            if (quickLoginAdminBtn) {
-                quickLoginAdminBtn.addEventListener('click', function() {
-                    document.getElementById('email').value = 'admin@attendance.com';
-                    document.getElementById('password').value = 'admin123';
-                    document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-                });
-            }
 
             // Attendance Marking Modal Event Listeners
             const attendanceModal = document.getElementById('attendanceModal');
