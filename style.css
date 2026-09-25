@@ -1,0 +1,1407 @@
+/* ===================================================================
+   Attendance Tracker - Dreamy Pink Sunset Beach Glassmorphism Theme
+   Background: Sunset Beach Wallpaper (Soft Pink Sky, Ocean Waves & Sun Glow)
+   Clean, Elegant, Airy, Translucent Frosted Glass - Strictly NO Glowing Fonts
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Dreamy Pink Sunset Beach Palette */
+    --primary: #f43f5e;         /* Rose / Sunset Coral 500 */
+    --primary-dark: #e11d48;    /* Rose 600 */
+    --primary-deep: #831843;    /* Rose 900 (High-contrast plum) */
+    --primary-soft: rgba(244, 63, 94, 0.12);
+    
+    --accent-coral: #fb7185;    /* Rose 400 */
+    --accent-peach: #fed7aa;    /* Orange 200 */
+    --accent-gold: #fbbf24;     /* Amber 400 */
+    --accent-rose: #f9a8d4;     /* Pink 300 */
+
+    /* Status Colors - High-contrast & crisp */
+    --success: #059669;         /* Emerald 600 */
+    --success-bg: rgba(236, 253, 245, 0.92);
+    --success-border: #a7f3d0;
+    
+    --danger: #dc2626;          /* Red 600 */
+    --danger-bg: rgba(255, 241, 242, 0.92);
+    --danger-border: #fecdd3;
+    
+    --warning: #d97706;         /* Amber 600 */
+    --warning-bg: rgba(254, 243, 199, 0.92);
+    --warning-border: #fde68a;
+
+    /* Text Colors - Ultra-sharp & readable */
+    --text-main: #1e293b;       /* Slate 800 */
+    --text-muted: #64748b;      /* Slate 500 */
+    --text-sub: #475569;        /* Slate 600 */
+    --text-heading: #831843;    /* Deep Rose 900 */
+
+    /* Frosted Sunset Glassmorphism Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.74);
+    --glass-card: rgba(255, 255, 255, 0.82);
+    --glass-card-hover: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.88);
+    --glass-border-subtle: rgba(244, 114, 182, 0.3);
+    --glass-header: rgba(255, 255, 255, 0.65);
+    
+    --shadow-soft: 0 14px 38px rgba(136, 19, 55, 0.08);
+    --shadow-card: 0 6px 22px rgba(190, 18, 60, 0.06);
+    --shadow-btn: 0 4px 16px rgba(244, 63, 94, 0.2);
+    
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-shadow: none !important; /* Zero glowing fonts everywhere - strictly enforced */
+}
+
+/* Full Page Background with User's Sunset Beach Wallpaper & Ambient Gradient Wash */
+body {
+    background-color: #fce7ec;
+    background-image: 
+        radial-gradient(ellipse at 50% 12%, rgba(255, 241, 242, 0.42) 0%, rgba(254, 226, 236, 0.25) 50%, rgba(251, 207, 216, 0.38) 100%),
+        url('background.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+/* Header - Translucent Frosted Glass (Airy & elegant, no flat solid blocks) */
+header {
+    background: var(--glass-header);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    color: var(--text-main);
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 30px rgba(190, 18, 60, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.88);
+}
+
+/* Logo Mark with Soft Rose Sunset Glow */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(254, 205, 211, 0.85), rgba(253, 164, 175, 0.7));
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9f1239;
+    box-shadow: 0 3px 12px rgba(225, 29, 72, 0.12);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover .logo-mark {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(225, 29, 72, 0.2);
+}
+
+.logo-text {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    color: var(--primary-deep);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-buttons {
+    display: none;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Base Buttons - Soft, Semi-Translucent, Elegant */
+.btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.btn:hover {
+    transform: translateY(-1.5px);
+    filter: brightness(1.04);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Header Nav Buttons */
+.btn-nav {
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--primary-deep);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(190, 18, 60, 0.04);
+    transition: all 0.2s ease;
+}
+
+.btn-nav:hover, .btn-nav.active {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.9), rgba(244, 63, 94, 0.95));
+    color: white;
+    border-color: #fecdd3;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.22);
+    transform: translateY(-1.5px);
+}
+
+.btn-nav-logout {
+    background: rgba(254, 226, 226, 0.65);
+    color: #be123c;
+    border: 1px solid rgba(254, 205, 211, 0.85);
+}
+
+.btn-nav-logout:hover {
+    background: rgba(225, 29, 72, 0.88);
+    color: white;
+}
+
+/* Auth Buttons */
+.btn-login {
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--primary-deep);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 999px;
+}
+
+.btn-login:hover {
+    background: #ffffff;
+    color: var(--primary);
+}
+
+.btn-signup {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.85), rgba(244, 63, 94, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    color: white;
+    border-radius: 999px;
+    box-shadow: 0 2px 10px rgba(225, 29, 72, 0.15);
+}
+
+.btn-signup:hover {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.95), rgba(225, 29, 72, 0.98));
+}
+
+/* Action & Status Buttons (Soft gradients, no heavy solid blocks) */
+.btn-present {
+    background: linear-gradient(135deg, rgba(52, 211, 153, 0.88), rgba(16, 185, 129, 0.92));
+    color: white;
+    padding: 9px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+}
+
+.btn-present:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95));
+}
+
+.btn-absent {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.88), rgba(244, 63, 94, 0.92));
+    color: white;
+    padding: 9px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 14px rgba(244, 63, 94, 0.2);
+}
+
+.btn-absent:hover {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.95), rgba(225, 29, 72, 0.95));
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-muted);
+    border: 1px solid rgba(203, 213, 225, 0.85);
+}
+
+.btn-secondary:hover {
+    background: #ffffff;
+    color: var(--text-main);
+}
+
+.btn-purple {
+    background: rgba(147, 51, 234, 0.12);
+    color: #7e22ce;
+    border: 1px solid rgba(147, 51, 234, 0.28);
+}
+
+.btn-purple:hover {
+    background: linear-gradient(135deg, rgba(192, 132, 252, 0.85), rgba(232, 121, 249, 0.85));
+    color: white;
+}
+
+.btn-danger {
+    background: rgba(225, 29, 72, 0.12);
+    color: #be123c;
+    border: 1px solid rgba(225, 29, 72, 0.28);
+}
+
+.btn-danger:hover {
+    background: rgba(225, 29, 72, 0.88);
+    color: white;
+}
+
+.btn-warning {
+    background: rgba(217, 119, 6, 0.12);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.28);
+}
+
+.btn-warning:hover {
+    background: rgba(217, 119, 6, 0.88);
+    color: white;
+}
+
+.btn-track {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.9), rgba(244, 63, 94, 0.95));
+    color: white;
+    padding: 12px 34px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: all 0.25s ease;
+}
+
+.btn-track:hover {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.98), rgba(225, 29, 72, 0.98));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225, 29, 72, 0.25);
+}
+
+/* Translucent Frosted Glass Pages */
+.page {
+    display: none;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    margin-top: 15px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--glass-border);
+}
+
+.active-page {
+    display: block;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Home Page */
+.home-hero {
+    text-align: center;
+    padding: 70px 24px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-card);
+}
+
+.home-hero h1 {
+    color: var(--primary-deep);
+    margin-bottom: 18px;
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.home-hero p {
+    color: var(--text-sub);
+    margin-bottom: 24px;
+    font-size: 1.15rem;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Attendance Page Date Display */
+.date-display {
+    background: rgba(255, 255, 255, 0.74);
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid var(--glass-border-subtle);
+}
+
+.current-date {
+    font-size: 1.75rem;
+    color: var(--primary-deep);
+    font-weight: 800;
+    letter-spacing: -0.3px;
+}
+
+.attendance-buttons {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 22px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===================================================================
+   Date Range Selector & Locked Together Previous Period % Controls
+   =================================================================== */
+.date-range {
+    background: rgba(255, 255, 255, 0.72);
+    padding: 20px 24px;
+    border-radius: var(--radius-md);
+    margin: 20px 0;
+    border: 1px solid var(--glass-border-subtle);
+}
+
+.date-range h3 {
+    margin-bottom: 14px;
+    color: var(--primary-deep);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.date-range-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.date-picker-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.date-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.date-field label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.date-field input {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text-main);
+}
+
+.date-field input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+}
+
+.date-btn-group {
+    display: flex;
+    gap: 8px;
+}
+
+.divider-vertical {
+    border-left: 1.5px solid rgba(244, 114, 182, 0.35);
+    height: 32px;
+    margin: 0 4px;
+}
+
+/* Fused Previous Period % Box & Button (Never separates or wraps down) */
+.prev-percent-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.prev-percent-wrapper label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.percent-input-button-lock {
+    display: inline-flex;
+    align-items: stretch;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(190, 18, 60, 0.06);
+    border: 1.5px solid rgba(244, 114, 182, 0.45);
+    background: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+}
+
+.percent-input-button-lock input {
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 8px 12px;
+    width: 76px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-align: center;
+    color: var(--primary-deep);
+    background: transparent;
+    outline: none;
+}
+
+.percent-input-button-lock input:focus {
+    background: #ffffff;
+}
+
+.btn-set-percent {
+    border-radius: 0 !important;
+    border: none !important;
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.9), rgba(244, 63, 94, 0.95)) !important;
+    color: white !important;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 8px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.btn-set-percent:hover {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.98), rgba(225, 29, 72, 0.98)) !important;
+}
+
+/* ===================================================================
+   Calendar Container (Dreamy Sunset Frosted Glass)
+   =================================================================== */
+.calendar-container {
+    margin: 24px 0;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 22px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid rgba(244, 114, 182, 0.35);
+    box-shadow: 0 10px 32px rgba(136, 19, 55, 0.08);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.calendar-header h2 {
+    color: var(--primary-deep);
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.calendar-nav-btn {
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--primary-deep);
+    border: 1px solid rgba(254, 205, 211, 0.85);
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: all 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(244, 63, 94, 0.2);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.day-header {
+    text-align: center;
+    padding: 11px 4px;
+    background: rgba(254, 226, 236, 0.75);
+    font-weight: 800;
+    color: var(--primary-deep);
+    border-radius: 8px;
+    font-size: 0.92rem;
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(244, 114, 182, 0.25);
+}
+
+.calendar-day {
+    min-height: 72px;
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(244, 114, 182, 0.24);
+    color: #1e293b;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.calendar-day:hover {
+    border-color: var(--primary);
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(225, 29, 72, 0.12);
+}
+
+.calendar-day.today {
+    border: 2px solid var(--primary);
+    background: #fff1f2;
+}
+
+.calendar-day.present {
+    background: rgba(236, 253, 245, 0.94);
+    color: var(--success);
+    border-color: var(--success-border);
+}
+
+.calendar-day.absent {
+    background: rgba(255, 241, 242, 0.94);
+    color: var(--danger);
+    border-color: var(--danger-border);
+}
+
+.calendar-day.holiday {
+    background: rgba(254, 243, 199, 0.94);
+    color: #92400e;
+    border-color: var(--warning-border);
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.day-number {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.day-status {
+    font-size: 0.74rem;
+    margin-top: 3px;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.2;
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Stats Section */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.84);
+    padding: 24px 20px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1.5px solid var(--glass-border);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(244, 114, 182, 0.5);
+}
+
+.stat-card h3 {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.stat-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 8px 0;
+    line-height: 1.1;
+}
+
+.percentage {
+    color: var(--primary);
+}
+
+.present-count {
+    color: var(--success);
+}
+
+.absent-count {
+    color: var(--danger);
+}
+
+.rolling-badge {
+    background: #fdf2f8;
+    color: #be185d;
+    border: 1px solid #fbcfe8;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    display: inline-block;
+    margin: 6px 0;
+    font-weight: 700;
+}
+
+/* Reset Attendance Section */
+.reset-section {
+    margin: 32px 0 20px 0;
+    padding: 22px;
+    background: rgba(254, 243, 199, 0.7);
+    border: 1px solid #fde68a;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.reset-section h3 {
+    color: #92400e;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.reset-section p {
+    color: #78350f;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+}
+
+.confirm-reset {
+    display: none;
+    margin-top: 16px;
+    padding: 16px;
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-radius: 8px;
+}
+
+.confirm-reset.active {
+    display: block;
+}
+
+/* ===================================================================
+   Visualization Page - Sunset Beach Aesthetic (Zero Glow)
+   NO Current % displayed anywhere on this page
+   =================================================================== */
+.visualization-page {
+    background: rgba(255, 255, 255, 0.76);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid var(--glass-border);
+    box-shadow: var(--shadow-soft);
+    color: var(--text-main);
+    border-radius: var(--radius-lg);
+    padding: 36px 28px;
+    text-align: center;
+}
+
+.visual-header h1 {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: var(--primary-deep);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+.visual-header p.sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 26px;
+}
+
+.visual-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 10px 0 26px 0;
+}
+
+.attendance-ring-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.attendance-ring {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.ring-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+        #fb7185 0% 0%,
+        rgba(255, 255, 255, 0.45) 0% 100%
+    );
+    box-shadow: 0 8px 24px rgba(225, 29, 72, 0.12);
+    transition: background 0.4s ease;
+}
+
+.ring-inner {
+    position: absolute;
+    width: 74%;
+    height: 74%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    top: 13%;
+    left: 13%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.ring-inner .percentage {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: var(--primary-deep);
+    line-height: 1;
+}
+
+.ring-label {
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.visual-goal-badge {
+    margin-top: 14px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #fecdd3;
+    color: var(--primary-deep);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.visual-metrics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 240px;
+    flex: 1;
+    max-width: 320px;
+}
+
+.visual-metric-card {
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: left;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.visual-metric-card .metric-title {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.visual-metric-card .metric-val {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 3px 0;
+}
+
+.visual-metric-card .metric-sub {
+    font-size: 0.82rem;
+    color: var(--text-sub);
+}
+
+.rolling-visualization {
+    margin: 15px auto;
+    padding: 22px 24px;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 660px;
+    border: 1px solid var(--glass-border);
+    text-align: left;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.rolling-visualization h3 {
+    color: var(--primary-deep);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.progress-bar-track {
+    position: relative;
+    height: 20px;
+    background: rgba(254, 226, 236, 0.85);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(244, 114, 182, 0.28);
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #f472b6, #fb7185, #10b981);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.target-pin {
+    position: absolute;
+    left: 75%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: #059669;
+    z-index: 2;
+}
+
+.progress-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.visual-breakdown-note {
+    font-size: 0.88rem;
+    color: var(--text-sub);
+    margin-top: 12px;
+    font-weight: 500;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(244, 114, 182, 0.3);
+}
+
+.btn-visual-back {
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--primary-deep);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    border-radius: 999px;
+    padding: 10px 32px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.08);
+}
+
+.btn-visual-back:hover {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.9), rgba(244, 63, 94, 0.92));
+    color: white;
+    border-color: transparent;
+}
+
+/* Admin Panel */
+.admin-panel {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 24px;
+    border-radius: var(--radius-md);
+    margin-top: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.admin-header h1 {
+    color: var(--primary-deep);
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.admin-stat {
+    background: rgba(255, 255, 255, 0.88);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-card);
+}
+
+.admin-box {
+    margin: 22px 0;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid #e2e8f0;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: var(--shadow-card);
+}
+
+.admin-box h3 {
+    margin-bottom: 12px;
+    color: var(--primary-deep);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.saturday-rules-card {
+    background: rgba(240, 253, 244, 0.85);
+    border: 1px solid #bbf7d0;
+    border-left: 5px solid #16a34a;
+}
+
+.saturday-options {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.saturday-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #dcfce7;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.status-holiday {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.status-working {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+/* Festival Filter Pills */
+.festival-filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    align-items: center;
+}
+
+.filter-pill {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--text-sub);
+    transition: all 0.15s ease;
+}
+
+.filter-pill:hover, .filter-pill.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Holiday List Styles */
+.holiday-list {
+    margin-top: 15px;
+    max-height: 320px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.holiday-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.holiday-list th {
+    background: rgba(255, 241, 242, 0.95);
+    padding: 10px 10px;
+    text-align: left;
+    color: var(--primary-deep);
+    font-size: 0.88rem;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.holiday-list td {
+    padding: 10px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+.holiday-list tr:hover {
+    background: #fff8f8;
+}
+
+.holiday-type-tag {
+    font-size: 0.74rem;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.tag-festival {
+    background: #fdf2f8;
+    color: #9d174d;
+    border: 1px solid #fbcfe8;
+}
+
+.tag-default {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+
+.tag-custom {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.tag-saturday {
+    background: #f3e8ff;
+    color: #6b21a8;
+    border: 1px solid #e9d5ff;
+}
+
+.delete-holiday-btn {
+    background: rgba(225, 29, 72, 0.12);
+    color: #be123c;
+    border: 1px solid rgba(225, 29, 72, 0.28);
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.15s;
+}
+
+.delete-holiday-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.restore-holiday-btn {
+    background: rgba(5, 150, 105, 0.12);
+    color: #047857;
+    border: 1px solid rgba(5, 150, 105, 0.28);
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.restore-holiday-btn:hover {
+    background: var(--success);
+    color: white;
+}
+
+.select-holiday-btn {
+    background: rgba(2, 132, 199, 0.12);
+    color: #0369a1;
+    border: 1px solid rgba(2, 132, 199, 0.28);
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.select-holiday-btn:hover {
+    background: #0284c7;
+    color: white;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 5, 25, 0.38);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: var(--radius-md);
+    width: 90%;
+    max-width: 440px;
+    box-shadow: 0 20px 48px rgba(136, 19, 55, 0.14);
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    color: var(--text-main);
+    animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.96); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal h2 {
+    color: var(--primary-deep);
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #ffffff;
+    color: var(--text-main);
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+}
+
+/* Notifications - Crisp, Elegant Sunset Pill */
+.notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    padding: 14px 22px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.3s ease;
+    font-size: 0.92rem;
+}
+
+.notification.success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95));
+}
+
+.notification.error {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.95), rgba(225, 29, 72, 0.95));
+}
+
+.notification.info {
+    background: linear-gradient(135deg, rgba(251, 113, 133, 0.95), rgba(244, 63, 94, 0.95));
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-muted);
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+.designer {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 14px;
+        align-items: stretch;
+    }
+
+    .nav-buttons, .auth-buttons {
+        justify-content: center;
+    }
+
+    .date-range-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .divider-vertical {
+        display: none;
+    }
+
+    .prev-percent-wrapper {
+        justify-content: space-between;
+    }
+
+    .calendar-grid {
+        gap: 4px;
+    }
+    
+    .calendar-day {
+        min-height: 52px;
+        padding: 4px 2px;
+    }
+
+    .day-number {
+        font-size: 0.95rem;
+    }
+
+    .day-status {
+        font-size: 0.65rem;
+    }
+    
+    .attendance-ring {
+        width: 210px;
+        height: 210px;
+    }
+
+    .ring-inner .percentage {
+        font-size: 2.6rem;
+    }
+}

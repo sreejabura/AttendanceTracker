@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header - Translucent Frosted Glass with Custom SVG Logo Mark -->
+        <header>
+            <div class="logo" id="headerLogo">
+                <div class="logo-mark">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="4"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <path d="M9 16l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <span class="logo-text">Attendance Tracker</span>
+            </div>
+            <div class="auth-buttons" id="authButtons">
+                <button class="btn btn-login" id="loginBtn">Login</button>
+                <button class="btn btn-signup" id="signupBtn">Sign Up</button>
+            </div>
+            <div class="nav-buttons" id="navButtons">
+                <button class="btn btn-nav" id="homeNavBtn">Home</button>
+                <button class="btn btn-nav" id="attendanceNavBtn">Attendance</button>
+                <button class="btn btn-nav" id="visualNavBtn">Visualization</button>
+                <button class="btn btn-nav" id="adminNavBtn">Admin</button>
+                <button class="btn btn-nav btn-nav-logout" id="logoutBtn">Logout</button>
+            </div>
+        </header>
+        
+        <!-- Home Page -->
+        <div class="page active-page" id="homePage">
+            <div class="home-hero">
+                <h1>Track Your Attendance Beautifully</h1>
+                <p>Stay on top of your attendance, calculate accurate rolling averages, respect official Indian festival holidays, and achieve your targets effortlessly.</p>
+                <button class="btn-track" id="startBtn">Start Tracking</button>
+            </div>
+        </div>
+        
+        <!-- Attendance Page -->
+        <div class="page" id="attendancePage">
+            <div class="date-display">
+                <div class="current-date" id="currentDate">Loading date...</div>
+            </div>
+            
+            <!-- Date Range Selector with Fused % Box & Button -->
+            <div class="date-range">
+                <h3>View Attendance for Specific Date Range</h3>
+                <div class="date-range-bar">
+                    <div class="date-picker-group">
+                        <div class="date-field">
+                            <label for="startDate">From:</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="date-field">
+                            <label for="endDate">To:</label>
+                            <input type="date" id="endDate">
+                        </div>
+                        <div class="date-btn-group">
+                            <button class="btn btn-present" id="applyDateRange">Apply Range</button>
+                            <button class="btn btn-secondary" id="resetDateRange">Reset</button>
+                        </div>
+                    </div>
+                    
+                    <div class="divider-vertical"></div>
+                    
+                    <!-- Fused together % input box and button (Never separates) -->
+                    <div class="prev-percent-wrapper">
+                        <label for="previousPercent">Previous Period %:</label>
+                        <div class="percent-input-button-lock">
+                            <input type="number" id="previousPercent" min="0" max="100" placeholder="e.g. 80" value="0">
+                            <button class="btn-set-percent" id="setPreviousPercent">Set Previous %</button>
+                        </div>
+                    </div>
+                </div>
+                <p id="rangeInfo" style="margin-top: 12px; color: var(--text-muted); font-size: 0.88rem;"></p>
+            </div>
+            
+            <div class="attendance-buttons">
+                <button class="btn btn-present" id="markPresent">Mark Present (Today)</button>
+                <button class="btn btn-absent" id="markAbsent">Mark Absent (Today)</button>
+            </div>
+            
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h2 id="calendarMonth">Loading Month...</h2>
+                    <div class="calendar-nav">
+                        <button class="calendar-nav-btn" id="prevMonth">← Previous</button>
+                        <button class="calendar-nav-btn" id="todayMonth">Today</button>
+                        <button class="calendar-nav-btn" id="nextMonth">Next →</button>
+                    </div>
+                </div>
+                <div class="calendar-grid" id="calendar">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Your Attendance %</h3>
+                    <div class="stat-value percentage" id="attendancePercent">0%</div>
+                    <div id="rollingDisplay" class="rolling-badge" style="display: none;"></div>
+                    <p style="margin-top: 6px; font-weight: 600;">Status: <span id="statusText">No Data</span></p>
+                    <p id="dateRangeInfo" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">For current month</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Present Days</h3>
+                    <div class="stat-value present-count" id="presentCount">0</div>
+                    <p style="color: var(--text-muted); font-weight: 500;">Out of <span id="workingDays" style="font-weight: 700; color: var(--text-main);">0</span> working days</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Absent Days</h3>
+                    <div class="stat-value absent-count" id="absentCount">0</div>
+                    <p id="neededDays" style="font-weight: 700; margin-top: 6px;">Need 0 more days for 75%</p>
+                </div>
+            </div>
+            
+            <!-- Reset Attendance Section -->
+            <div class="reset-section">
+                <h3>🔄 Reset Attendance</h3>
+                <p>Clear all your personal attendance marks and start fresh. This action cannot be undone.</p>
+                <button class="btn btn-danger" id="showResetConfirm">Reset My Attendance</button>
+                
+                <div class="confirm-reset" id="confirmReset">
+                    <p><strong>⚠️ Are you absolutely sure?</strong></p>
+                    <p style="margin-bottom: 12px; font-size: 0.92rem;">This will permanently clear all your marked dates and absence notes.</p>
+                    <button class="btn btn-danger" id="confirmResetBtn">Yes, Reset Everything</button>
+                    <button class="btn btn-secondary" id="cancelResetBtn" style="margin-left: 8px;">Cancel</button>
+                </div>
+            </div>
+            
+            <!-- Bottom actions (visualization button in header) -->
+            <div style="text-align: center; margin-top: 25px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+                <button class="btn btn-purple" id="viewNotesBtn">
+                    📝 View My Absence Notes
+                </button>
+                <button class="btn btn-secondary" id="goHome">Back to Home</button>
+            </div>
+        </div>
+        
+        <!-- Visualization Page (NO Current % shown anywhere on this page) -->
+        <div class="page" id="visualizationPage">
+            <div class="visualization-page">
+                <div class="visual-header">
+                    <h1>Attendance Analytics</h1>
+                    <p class="sub">Visual overview of your overall attendance performance and target progress.</p>
+                </div>
+                
+                <div class="visual-hero">
+                    <!-- Attendance Ring (Displays overall attendance %) -->
+                    <div class="attendance-ring-wrapper">
+                        <div class="attendance-ring">
+                            <div class="ring-container" id="currentRing"></div>
+                            <div class="ring-inner">
+                                <div class="percentage" id="visualPercentage">0%</div>
+                                <div class="ring-label">ATTENDANCE</div>
+                            </div>
+                        </div>
+                        <div id="visualGoalBadge" class="visual-goal-badge">Target: 75% Target</div>
+                    </div>
+
+                    <!-- Metric Cards (Present Days, Absent Days, Goal Status - NO Current %) -->
+                    <div class="visual-metrics-grid">
+                        <div class="visual-metric-card">
+                            <div class="metric-title">Present Days</div>
+                            <div class="metric-val" id="visualPresentVal" style="color: var(--success);">0</div>
+                            <div class="metric-sub" id="visualWorkingSub">Out of 0 working days</div>
+                        </div>
+                        <div class="visual-metric-card">
+                            <div class="metric-title">Absent Days</div>
+                            <div class="metric-val" id="visualAbsentVal" style="color: var(--danger);">0</div>
+                            <div class="metric-sub" id="visualAbsentSub">Recorded absences</div>
+                        </div>
+                        <div class="visual-metric-card">
+                            <div class="metric-title">Goal Target (75%)</div>
+                            <div class="metric-val" id="visualGoalVal" style="color: var(--primary);">Need 0 Days</div>
+                            <div class="metric-sub" id="visualGoalSub">Requirement: 75%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Performance Scale & Breakdown Section -->
+                <div class="rolling-visualization">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="margin-bottom: 0;">📊 Overall Performance</h3>
+                        <span id="visualStatusBadge" style="font-size: 0.85rem; font-weight: 700; color: var(--primary-deep);">Goal: 75%</span>
+                    </div>
+                    <div class="progress-bar-track">
+                        <div id="rollingBar" class="progress-bar-fill"></div>
+                        <div class="target-pin" title="75% Target"></div>
+                    </div>
+                    <div class="progress-scale">
+                        <span>0%</span>
+                        <span style="color: var(--success); font-weight: 700; font-size: 0.8rem;">75% Target</span>
+                        <span id="rollingPercentValue" style="color: var(--primary); font-weight: 800;">0%</span>
+                        <span>100%</span>
+                    </div>
+                    <div id="visualRollingBreakdown" class="visual-breakdown-note"></div>
+                </div>
+                
+                <!-- Back button -->
+                <div style="margin-top: 26px;">
+                    <button class="btn btn-visual-back" id="backToAttendance">← Back to Attendance</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin Page -->
+        <div class="page" id="adminPage">
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="admin-stat">
+                    <h3 style="color: var(--text-muted); font-size: 0.95rem; font-weight: 700;">Active Session</h3>
+                    <div class="stat-value" id="activeUsers" style="color: var(--primary); font-size: 2.2rem;">1</div>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Currently authenticated</p>
+                </div>
+                <div class="admin-stat">
+                    <h3 style="color: var(--text-muted); font-size: 0.95rem; font-weight: 700;">Registered Accounts</h3>
+                    <div class="stat-value" id="totalUsers" style="color: var(--success); font-size: 2.2rem;">1</div>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Local user accounts</p>
+                </div>
+                <div class="admin-stat">
+                    <h3 style="color: var(--text-muted); font-size: 0.95rem; font-weight: 700;">Active Holidays</h3>
+                    <div class="stat-value" id="totalHolidays" style="color: var(--warning); font-size: 2.2rem;">0</div>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Festivals & off-days active</p>
+                </div>
+            </div>
+            
+            <div class="admin-panel">
+                <!-- 2nd and 4th Saturday Holiday Controls -->
+                <div class="admin-box saturday-rules-card">
+                    <h3>🗓️ Saturday Holiday Rules & Deletion</h3>
+                    <p style="color: var(--text-sub); font-size: 0.92rem; margin-bottom: 12px;">
+                        Configure or remove standard 2nd & 4th Saturday off-days. Turn off either Saturday to make them regular working days.
+                    </p>
+                    <div class="saturday-options">
+                        <div class="saturday-item">
+                            <span style="font-weight: 700; color: var(--text-main);">2nd Saturday Holiday:</span>
+                            <span id="secondSatBadge" class="status-badge status-holiday">Active Holiday</span>
+                            <button class="btn btn-danger" id="toggleSecondSatBtn" style="padding: 5px 12px; font-size: 0.82rem;">Delete Holiday (Make Working)</button>
+                        </div>
+                        <div class="saturday-item">
+                            <span style="font-weight: 700; color: var(--text-main);">4th Saturday Holiday:</span>
+                            <span id="fourthSatBadge" class="status-badge status-holiday">Active Holiday</span>
+                            <button class="btn btn-danger" id="toggleFourthSatBtn" style="padding: 5px 12px; font-size: 0.82rem;">Delete Holiday (Make Working)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Set Monthly Working Days Override -->
+                <div class="admin-box">
+                    <h3>📆 Monthly Working Days Override</h3>
+                    <div style="margin: 14px 0; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <label style="font-weight: 600;">Select Month:</label>
+                        <select id="adminMonthSelect" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: rgba(255,255,255,0.92); font-size: 0.92rem;">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                        <label style="font-weight: 600; margin-left: 10px;">Working Days:</label>
+                        <input type="number" id="workingDaysInput" value="22" min="10" max="31" style="padding: 8px 10px; width: 80px; border-radius: 8px; border: 1px solid #cbd5e1; background: rgba(255,255,255,0.92);">
+                        <button class="btn btn-present" id="setWorkingDays">Save Working Days</button>
+                    </div>
+                    <p id="workingDaysInfo" style="color: var(--text-muted); font-size: 0.88rem;">Loading month info...</p>
+                </div>
+                
+                <!-- Add Custom Holiday Section -->
+                <div class="admin-box">
+                    <h3>➕ Add Custom Holiday</h3>
+                    <div style="margin: 14px 0; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <label style="font-weight: 600;">Date:</label>
+                        <input type="date" id="holidayDate" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: rgba(255,255,255,0.92);">
+                        <label style="font-weight: 600; margin-left: 10px;">Reason / Festival:</label>
+                        <input type="text" id="holidayReason" placeholder="e.g. Regional Festival, Sports Day" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: rgba(255,255,255,0.92); min-width: 240px;">
+                        <button class="btn btn-present" id="addHoliday">Add Holiday</button>
+                    </div>
+                </div>
+                
+                <!-- Indian Festival Holidays & Deletion Management -->
+                <div class="admin-box" style="background: rgba(255, 241, 242, 0.85); border: 1px solid #fecdd3; border-left: 5px solid var(--primary);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                        <h3 style="color: var(--primary-deep); margin-bottom: 0;">🎉 Indian Festival & Official Holidays Manager</h3>
+                        <button class="btn btn-warning" id="restoreAllFestivalsBtn" style="padding: 6px 14px; font-size: 0.82rem;">
+                            ↺ Restore All Default Festivals
+                        </button>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-sub); margin-bottom: 14px;">
+                        Official Indian festivals and gazetted holidays.
+                        Click <strong>"Remove"</strong> on any festival to permanently remove it and convert that date into a working day!
+                    </p>
+                    
+                    <!-- Quick Delete by Date Picker -->
+                    <div style="margin-bottom: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; background: rgba(255, 255, 255, 0.9); padding: 12px; border-radius: 8px; border: 1px solid #fecdd3;">
+                        <label style="font-weight: 600;">Select Date to Delete:</label>
+                        <input type="date" id="deleteHolidayDate" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff;">
+                        <button class="btn btn-absent" id="deleteHolidayBtn">Delete Holiday</button>
+                    </div>
+                    
+                    <!-- Category Filters & Search -->
+                    <div class="festival-filter-bar">
+                        <button class="filter-pill active" data-filter="all">All Holidays</button>
+                        <button class="filter-pill" data-filter="festival">Indian Festivals</button>
+                        <button class="filter-pill" data-filter="national">National Holidays</button>
+                        <button class="filter-pill" data-filter="saturday">Saturday Off-Days</button>
+                        <button class="filter-pill" data-filter="deleted">Deleted / Working Days</button>
+                        <input type="text" id="holidaySearchInput" placeholder="🔍 Search festival (e.g. Diwali)..." style="margin-left: auto; padding: 6px 14px; border-radius: 20px; border: 1px solid #cbd5e1; font-size: 0.85rem; width: 220px; background: #fff;">
+                    </div>
+                    
+                    <div id="holidayList" class="holiday-list">
+                        <p style="color: var(--text-muted); font-style: italic; text-align: center; padding: 20px;">Loading holidays...</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn-track" id="goHomeFromAdmin">Back to Home</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 Attendance Tracker</p>
+            <p>Designed by <span class="designer">Sreejabura</span></p>
+        </footer>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Enter email (admin@attendance.com for admin)" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter password (admin123 for admin)" required>
+                </div>
+                <button type="submit" class="btn-track" style="width: 100%; border-radius: 8px;">Login</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 15px; color: var(--text-muted); font-size: 0.92rem;">
+                Need an account? <a href="#" id="showSignup" style="color: var(--primary); font-weight: 700;">Sign up</a>
+            </p>
+            <button type="button" class="btn btn-secondary" style="width: 100%; margin-top: 10px;" id="closeModal">Cancel</button>
+        </div>
+    </div>
+    
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create password (min 6 chars)" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                </div>
+                <button type="submit" class="btn-track" style="width: 100%; border-radius: 8px;">Sign Up</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px; color: var(--text-muted); font-size: 0.92rem;">
+                Already have an account? <a href="#" id="showLogin" style="color: var(--primary); font-weight: 700;">Login</a>
+            </p>
+            <button type="button" class="btn btn-secondary" style="width: 100%; margin-top: 10px;" id="closeSignupModal">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Attendance Marking Modal -->
+    <div class="modal" id="attendanceModal">
+        <div class="modal-content" style="max-width: 440px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                    <h2 id="modalDateTitle" style="color: var(--primary-deep); margin-bottom: 4px; font-size: 1.4rem; text-align: left;">Mark Attendance</h2>
+                    <p id="modalDateSubtitle" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+                </div>
+                <button type="button" id="closeAttendanceModalX" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #888; line-height: 1;">&times;</button>
+            </div>
+            
+            <div id="modalStatusBadge" style="margin-bottom: 18px; padding: 10px; border-radius: 8px; text-align: center; font-weight: 700; font-size: 0.95rem;">
+                <!-- Status badge populated by JS -->
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: 700; margin-bottom: 8px; color: var(--text-main);">Mark Attendance:</label>
+                <div style="display: flex; gap: 12px;">
+                    <button type="button" class="btn btn-present" id="modalPresentBtn" style="flex: 1; padding: 12px; font-size: 1rem; border-radius: 8px;">
+                        ✓ Present
+                    </button>
+                    <button type="button" class="btn btn-absent" id="modalAbsentBtn" style="flex: 1; padding: 12px; font-size: 1rem; border-radius: 8px;">
+                        ✕ Absent
+                    </button>
+                </div>
+            </div>
+            
+            <div id="modalNoteSection" style="margin-bottom: 18px;">
+                <label for="modalAbsenceNote" style="display: block; font-weight: 700; margin-bottom: 6px; color: var(--text-main); font-size: 0.9rem;">
+                    📝 Reason for Absence / Notes:
+                </label>
+                <textarea id="modalAbsenceNote" placeholder="Enter reason if absent (e.g. Sick, Family event)" rows="3" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; box-sizing: border-box; background: #ffffff;"></textarea>
+                <small style="color: var(--text-muted); display: block; margin-top: 4px;">Note is saved with your attendance record.</small>
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid rgba(147, 197, 253, 0.2); padding-top: 15px;">
+                <button type="button" class="btn btn-warning" id="modalClearBtn" style="display: none; padding: 8px 14px; font-size: 0.9rem;">
+                    🗑️ Clear Mark
+                </button>
+                <div style="margin-left: auto;">
+                    <button type="button" class="btn btn-secondary" id="modalCancelBtn" style="padding: 8px 16px; font-size: 0.9rem;">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script file -->
+    <script src="script.js"></script>
+</body>
+</html>
